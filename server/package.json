@@ -1,0 +1,34 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha 'tests/**'",
+    "dev": "npx nodemon Server.js"
+  },
+  "keywords": [
+    "RestAPI",
+    "Express",
+    "MongoDB",
+    "Mongoose"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.4.1",
+    "mongoose": "^5.11.18",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.3",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.21.0",
+    "mocha": "^8.3.1",
+    "nodemon": "^2.0.7"
+  }
+}
