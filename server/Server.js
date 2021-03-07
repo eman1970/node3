@@ -6,11 +6,13 @@ import morgan from 'morgan'
 import middlewares from './src/middlewares/Middlewares.js'
 import Configurations from './src/configurations/Configurations.js'
 import UserRoutes from './src/routes/User.route.js'
+import cors from 'cors'
 
 dotenv.config()
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors({credentials: true}))
 app.use(helmet())
 app.use(morgan('common'))
 

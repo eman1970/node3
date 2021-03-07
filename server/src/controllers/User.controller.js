@@ -5,7 +5,8 @@ const createUser = async (request, response) => {
 
     const user = new UserModel({
         username: request.body.username,
-        password: request.body.password
+        password: request.body.password,
+        age: request.body.age,
     })
 
     try {
@@ -36,7 +37,7 @@ const getAllUsers = async (request, response) => {
 const deleteUser = async (request, response) => {
     const user = request.body.username
     try {
-        const databaseResponse = await UserModel.deleteOne<String>({ username: user })
+        const databaseResponse = await UserModel.deleteOne({ username: user })
         response.status(StatusCode.OK).send(databaseResponse)
     } catch (error) {
         response.status(StatusCode.INTERNAL_SERVER_ERROR).send({

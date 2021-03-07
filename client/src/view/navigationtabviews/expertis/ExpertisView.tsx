@@ -1,34 +1,47 @@
-import React, { useState, useEffect } from 'react';
-
-
-
+import BackendAPIService from '../../../shared/api/service/BackendAPIService'
+import { useState, useEffect } from 'react'
+import { iCreateNewUser } from '../../../shared/interface/Interface';
 
 
 export const ExpertisView = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [newUser, setNewUser] = useState<iCreateNewUser>({
+        username: 'Mowgli',
+        password: 'dsdsdd'
+    })
 
+    const create = async () => {
+        try {
+            setLoading(true)
+            await BackendAPIService.createUser(newUser)
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+        }
 
-    const [firstName, setFirstName] = useState(() =>
-        window.localStorage.getItem('hooksFirstName') || ''
-    );
-    const [lastName, setLastName] = useState(() =>
-        window.localStorage.getItem('hooksLastName') || ''
-    );
-    const handleFirstNameChange = (e: any) => setFirstName(e.target.value);
-    const handleLastNameChange = (e: any) => setLastName(e.target.value);
+    }
+
+    const fecthData = async () => {
+        const response = await BackendAPIService.getAllUsers()
+        setUsers(response.data)
+    }
 
     useEffect(() => {
-        window.localStorage.setItem('hooksFirstName', firstName);
-        window.localStorage.setItem('hooksLastName', lastName);
-    });
+        fecthData()
+    }, [loading])
 
     return (
         <div>
-            <h1>This is the expertisView</h1>
-            <span><h2>First Name</h2><input value={firstName} onChange={handleFirstNameChange} /></span><br />
-            <span><h2>Last Name</h2>  <input value={lastName} onChange={handleLastNameChange} /></span>
-            <h3>
-                Hello, <span>{firstName} {lastName}</span>
-            </h3>
+            <h1>BACKEND API</h1>
+            <p>USERNAME</p><input onChange={(event) => setNewUser({...newUser, username: event.target.value})}/><br />
+            <p>PASSWORD</p><input /><br />
+            <p>AGE</p><input /><br />
+            <button onClick={() => create()}>Create user</button><br />
+            <hr />
+            <h1>Displaying all users</h1>
+            {users.map((x: any) => <div><span>{x.username}</span></div>)}
         </div>
     );
 }

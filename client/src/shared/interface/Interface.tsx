@@ -4,4 +4,9 @@ password: string
 
 }
 
+export interface iCreateNewUser {
+    username: string,
+    password: string,
+    age?: number
+}
  
