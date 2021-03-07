@@ -87,6 +87,12 @@ const deleteUser = () => {
     describe('Testing DELETE(DELETE) method for user entity', () => {
         test('Excpecting a user to be deleted', (done) => {
             Chai.request(app)
+                .delete('/del')
+                .end((error, response) => {
+                    response.should.have.status(StatusCode.OK)                                  
+                    done()
+
+                })
         })
     })
 
@@ -100,5 +106,6 @@ describe('TESTING THE USER_API ROUTE', () => {
     createUser()
     getAllUsers()
     updateUser()
+    deleteUser()
 })
 

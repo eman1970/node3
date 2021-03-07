@@ -36,7 +36,7 @@ const getAllUsers = async (request, response) => {
 const deleteUser = async (request, response) => {
     const user = request.body.username
     try {
-        const databaseResponse = await UserModel.deleteOne({ username: user })
+        const databaseResponse = await UserModel.deleteOne<String>({ username: user })
         response.status(StatusCode.OK).send(databaseResponse)
     } catch (error) {
         response.status(StatusCode.INTERNAL_SERVER_ERROR).send({
