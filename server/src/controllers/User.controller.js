@@ -6,7 +6,7 @@ const createUser = async (request, response) => {
     const user = new UserModel({
         username: request.body.username,
         password: request.body.password,
-        age: request.body.age,
+        age: request.body.age
     })
 
     try {
