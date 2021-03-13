@@ -35,10 +35,11 @@ const getAllUsers = async (request, response) => {
 }
 
 const deleteUser = async (request, response) => {
-    const user = request.body.username
+    
     try {
+        const user = request.body.username
         const databaseResponse = await UserModel.deleteOne({ username: user })
-        response.status(StatusCode.OK).send(databaseResponse)
+        response.status(StatusCode.OK).send({ message: 'Successfully updated user by username', data: databaseResponse })
     } catch (error) {
         response.status(StatusCode.INTERNAL_SERVER_ERROR).send({
             message: 'Error while trying to delete user',
@@ -52,7 +53,7 @@ const deleteUserById = async (request, response) => {
     try {
         const userId = request.params.userId
         const databaseResponse = await UserModel.findByIdAndDelete(userId)
-        response.status(StatusCode.OK).send(databaseResponse)
+        response.status(StatusCode.OK).send({ message: 'Successfully deleted user by ID', data: databaseResponse })
     } catch (error) {
         response.status(StatusCode.INTERNAL_SERVER_ERROR).send({
             message: `Error while trying to delete user by ID ${userId}`,
