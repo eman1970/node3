@@ -10,8 +10,16 @@ const getAllUsers = () => {
 
 }
 
+ 
+
+const deleteUser = (_id: String | undefined) => {
+    return http.delete(`/delete/${_id}`)
+
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     createUser,
-    getAllUsers
+    getAllUsers,
+    deleteUser
 }
