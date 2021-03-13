@@ -6,9 +6,9 @@ import { iCreateNewUser } from '../../../shared/interface/Interface';
 
 export const ExpertisView = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState<any>([])
     const [loading, setLoading] = useState(false)
-    const [newUser, setNewUser] = useState<iCreateNewUser>({ _id: '', username: '', password: '' })
+    const [newUser, setNewUser] = useState<iCreateNewUser>({username: '', password: '' })
 
     const create = async () => {
 
@@ -22,7 +22,7 @@ export const ExpertisView = () => {
 
     }
     
-    const deleteASpecificUser = async () => {        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+/*    const deleteASpecificUser = async () => {        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       
         try {
             setLoading(true)
@@ -32,7 +32,7 @@ export const ExpertisView = () => {
          catch (error) {
             console.log(error)
         }       
-    }
+    } */
 
     const deleteUser = async (_id: any) => {
 
@@ -71,13 +71,12 @@ export const ExpertisView = () => {
                 <p>USERNAME</p><input onChange={(event) => setNewUser({ ...newUser, username: event.target.value })} /><br />
                 <p>PASSWORD</p><input onChange={(event) => setNewUser({ ...newUser, password: event.target.value })} /><br />
                 <p>AGE</p> <input type='number' onChange={(event) => setNewUser({ ...newUser, age: parseInt(event.target.value) })} />
-                <p>DELETE USER BY ID:</p><input onChange={(event) => setNewUser({ ...newUser, _id:event.target.value })} /><br />
                 <br />
-                <button onClick={() => create()}>Create user</button><br />
-                <button onClick={() => deleteASpecificUser()}>deleteA user</button><br />
+                <button onClick={() => create()}>Create expert</button><br />
+          
 
                 <hr />
-                <h1>Displaying all users</h1>
+                <h1>Displaying all experts</h1>
                 <p>{newUser._id}</p>
                 {users.map((x: any) => <div><span><i><b>ID: </b>{x._id}</i><br /><b>Username: {x.username}</b><br /><b>Password: </b>{x.password}<br /><b>Age: </b>{x.age}<br /><button onClick={() =>{deleteUser(x._id)}}>Delete</button><hr /></span></div>)}<br />
 
